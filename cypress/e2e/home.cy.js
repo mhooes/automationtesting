@@ -7,7 +7,7 @@ describe('Home page automation test', () => {
     cy.title().should('contains', 'Automation Practice Site');
   });
 
-  /*     it('Home Page with three Sliders only', () => {
+      it('Home Page with three Sliders only', () => {
           cy.get('#n2-ss-6-align').find('.n2-ss-slide-fill').should('have.length', 3);
       });
   
@@ -40,7 +40,7 @@ describe('Home page automation test', () => {
       cy.get('.woocommerce-message').should('contain', 'has been added to your basket');
       cy.get('#wpmenucartli').find('.cartcontents').should('contain', '1 item');    
     });
-   */
+  
   it('Arrivals-Add to Basket with more books', () => {
     cy.get('.post-160 > .woocommerce-LoopProduct-link > .attachment-shop_catalog').click();
     cy.get('.quantity').find('input').invoke('attr', 'max').then($max => {
