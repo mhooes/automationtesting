@@ -54,4 +54,42 @@ describe('Home page automation test', () => {
 
   });
 
+  it('Arrivals-Add to Basket-Items', () => {
+    cy.get('.post-160 > .woocommerce-LoopProduct-link > .attachment-shop_catalog').click();
+    cy.get('.single_add_to_cart_button').should('exist').click();
+    cy.get('.woocommerce-message').should('contain', 'has been added to your basket');
+    cy.get('#wpmenucartli').find('.cartcontents').should('contain', '1 item').click();
+    cy.url().should('contain','basket/');   
+  });
+
+  it('Add to Basket-Items-Coupon', () => {
+    cy.get('.post-160 > .woocommerce-LoopProduct-link > .attachment-shop_catalog').click();
+    cy.get('.single_add_to_cart_button').should('exist').click();
+    cy.get('.woocommerce-message').should('contain', 'has been added to your basket');
+    cy.get('#wpmenucartli').find('.cartcontents').should('contain', '1 item').click();
+    cy.url().should('contain','basket/'); 
+    cy.get('.coupon').find('#coupon_code').type('krishnasakinala {enter}');
+    cy.get('.cart-discount').should('be.visible').and('exist')  
+  });
+
+  it('Add to Basket-Items-Coupon value<450', () => {
+    cy.get('.post-165 > .woocommerce-LoopProduct-link > .attachment-shop_catalog').click();
+    cy.get('.single_add_to_cart_button').should('exist').click();
+    cy.get('.woocommerce-message').should('contain', 'has been added to your basket');
+    cy.get('#wpmenucartli').find('.cartcontents').should('contain', '1 item').click();
+    cy.url().should('contain','basket/'); 
+    cy.get('.coupon').find('#coupon_code').type('krishnasakinala {enter}');
+    cy.get('.woocommerce-error > li').should('have.text', 'The minimum spend for this coupon is ₹450.00.')
+    cy.get('.cart-discount').should('not.exist')  
+  });
+
+  it('Add to Basket-Items-Remove book', () => {
+    cy.get('.post-165 > .woocommerce-LoopProduct-link > .attachment-shop_catalog').click();
+    cy.get('.single_add_to_cart_button').should('exist').click();
+    cy.get('.woocommerce-message').should('contain', 'has been added to your basket');
+    cy.get('#wpmenucartli').find('.cartcontents').should('contain', '1 item').click();
+    cy.url().should('contain','basket/'); 
+    cy.get('.remove').click();
+    cy.get('.woocommerce-message').should('have.text', 'Mastering JavaScript removed. Undo?')
+  });
 })
