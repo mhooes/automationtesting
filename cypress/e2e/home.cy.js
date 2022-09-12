@@ -7,7 +7,7 @@ describe('Home page automation test', () => {
     cy.title().should('contains', 'Automation Practice Site');
   });
 
-  /*       it('Home Page with three Sliders only', () => {
+ /*        it('Home Page with three Sliders only', () => {
             cy.get('#n2-ss-6-align').find('.n2-ss-slide-fill').should('have.length', 3);
         });
     
@@ -91,9 +91,9 @@ describe('Home page automation test', () => {
       cy.url().should('contain','basket/'); 
       cy.get('.remove').click();
       cy.get('.woocommerce-message').should('have.text', 'Mastering JavaScript removed. Undo?')
-    }); */
+    });
 
-  it('Add to Basket-Items-Remove book', () => {
+  it('Add to Basket-Items-Add book', () => {
     cy.get('.post-165 > .woocommerce-LoopProduct-link > .attachment-shop_catalog').click();
     cy.get('.single_add_to_cart_button').should('exist').click();
     cy.get('.woocommerce-message').should('contain', 'has been added to your basket');
@@ -108,8 +108,23 @@ describe('Home page automation test', () => {
 
     });
 
-  });
+  }); */
 
-  
+  it('Add to Basket-Items-Add book', () => {
+    cy.get('.post-165 > .woocommerce-LoopProduct-link > .attachment-shop_catalog').click();
+    cy.get('.single_add_to_cart_button').should('exist').click();
+    cy.get('.woocommerce-message').should('contain', 'has been added to your basket');
+    cy.get('#wpmenucartli').find('.cartcontents').should('contain', '1 item').click();
+    cy.url().should('contain', 'basket/');
+    cy.get('.quantity').find('input').clear().type('2 {enter}')
+    cy.xpath('//*[@id="page-34"]/div/div[1]/form/table/tbody/tr[1]/td[4]/span/text()').then($PRICE => {
+      const PRICE = $PRICE;
+      cy.get('.order-total > td:nth-child(2) > strong:nth-child(1) > span:nth-child(1)').should((value) => {
+        expect(value).to.contain(714);
+      });
+
+    });
+
+  }); 
 
 })
