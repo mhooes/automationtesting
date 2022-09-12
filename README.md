@@ -60,7 +60,7 @@ El comando anterior hay que ejecutarlo periódicamente. Para mayor información 
 
 ### Web de ejemplo
 
-Utilizamos como ejemplo para realizar pruebas con el framework la siguiente [web pública](https://www.demoblaze.com/).
+Utilizamos como ejemplo para realizar pruebas con el framework la siguiente [web pública](https://practice.automationtesting.in).
 
 ### Créditos
 
