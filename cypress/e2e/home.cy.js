@@ -57,6 +57,7 @@ describe('Home page automation test', () => {
       it('Arrivals-Add to Basket-Items', () => {
         cy.get('.post-160 > .woocommerce-LoopProduct-link > .attachment-shop_catalog').click();
         cy.get('.single_add_to_cart_button').should('exist').click();
+        cy.wait(500)
         cy.get('.woocommerce-message').should('contain', 'has been added to your basket');
         cy.get('#wpmenucartli').find('.cartcontents').should('contain', '1 item').click();
         cy.url().should('contain','basket/');   
