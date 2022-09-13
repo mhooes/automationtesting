@@ -7,7 +7,7 @@ describe('Home page automation test', () => {
     cy.title().should('contains', 'Automation Practice Site');
   });
 
- /*        it('Home Page with three Sliders only', () => {
+        it('Home Page with three Sliders only', () => {
             cy.get('#n2-ss-6-align').find('.n2-ss-slide-fill').should('have.length', 3);
         });
     
@@ -108,9 +108,9 @@ describe('Home page automation test', () => {
 
     });
 
-  }); */
+  });
 
-  it('Add to Basket-Items-Add book', () => {
+  it('Arrivals-Add to Basket-Items-Check-out-Total & Sub-total condition', () => {
     cy.get('.post-165 > .woocommerce-LoopProduct-link > .attachment-shop_catalog').click();
     cy.get('.single_add_to_cart_button').should('exist').click();
     cy.get('.woocommerce-message').should('contain', 'has been added to your basket');
@@ -126,5 +126,40 @@ describe('Home page automation test', () => {
     });
 
   }); 
+
+  it('Arrivals-Add to Basket-Items-Check-out-Total & Sub-total condition', () => {
+    cy.get('.post-165 > .woocommerce-LoopProduct-link > .attachment-shop_catalog').click();
+    cy.get('.single_add_to_cart_button').should('exist').click();
+    cy.get('.woocommerce-message').should('contain', 'has been added to your basket');
+    cy.get('#wpmenucartli').find('.cartcontents').should('contain', '1 item').click();
+    cy.url().should('contain', 'basket/');
+    cy.get('.checkout-button').click();
+    cy.url().should('contain', 'checkout/')
+
+  }); 
+
+  it('Arrivals-Add to Basket-Items-Check-out-Payment Gateway', () => {
+    cy.get('.post-165 > .woocommerce-LoopProduct-link > .attachment-shop_catalog').click();
+    cy.get('.single_add_to_cart_button').should('exist').click();
+    cy.get('.woocommerce-message').should('contain', 'has been added to your basket');
+    cy.get('#wpmenucartli').find('.cartcontents').should('contain', '1 item').click();
+    cy.url().should('contain', 'basket/');
+    cy.get('.checkout-button').click();
+    cy.url().should('contain', 'checkout/')
+    cy.get('#billing_first_name').type('Emiliano');
+    cy.get('#billing_last_name').type('Palacio');
+    cy.get('#billing_email').type('pasda@gmail.com');
+    cy.get('#billing_phone_field').type('112234646');
+    cy.get('#s2id_billing_country').click();
+    cy.get('#s2id_autogen1_search').type('Argentina{enter}');
+    cy.get('#billing_address_1').type('asdqweasdf');
+    cy.get('#billing_city').type('Moron');
+    cy.get('#select2-chosen-2').click();
+    cy.get('#s2id_autogen2_search').type('Buenos Aires{enter}');
+    cy.get('#billing_postcode').type('12323');
+    cy.get('#payment_method_cod').check()
+    cy.get('#place_order').click()
+    cy.url().should('contain', 'order-received/')
+  });
 
 })
